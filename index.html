@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+:root {
+  --pink:#ff4d6d;
+  --purple:#6a0dad;
+  --white:#fff;
+}
+
+body {
+  margin:0;
+  font-family:Segoe UI, sans-serif;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:white;
+}
+
+#box {
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(12px);
+  padding:25px;
+  border-radius:20px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+button {
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  font-size:18px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#yes {
+  background:#ff0033;
+  color:white;
+}
+
+#no {
+  background:white;
+  color:#6a0dad;
+  position:absolute;
+}
+
+.hidden {display:none;}
+
+h1 {font-size:22px;}
+p {font-size:16px;}
+
+/* Hearts Animation */
+.heart {
+  position:absolute;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall {
+  from {transform:translateY(-10vh);}
+  to {transform:translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Romantic Music -->
+<audio autoplay loop>
+  <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+</audio>
+
+<div id="box">
+
+<div id="screen1">
+  <h1>🌹 Ready for a Sweet Valentine Game, Musu? 💕</h1>
+  <button id="yes" onclick="next()">Yes 😘</button>
+  <button id="no" onmouseover="moveNo()">No 🙄</button>
+</div>
+
+<div id="screen2" class="hidden">
+  <h1>🎁 Surprise for You My Love ❤️</h1>
+  <p id="letter"></p>
+  <button id="yes" onclick="showPhotos()">See My Gifts 📸</button>
+</div>
+
+<div id="photos" class="hidden">
+  <h1>💞 Our Memories 💞</h1>
+  <img src="https://i.imgur.com/3yZK6XK.jpg" width="100%" style="border-radius:15px;">
+  <p>I want to spend my whole life with you ❤️</p>
+</div>
+
+</div>
+
+<script>
+// Questions
+const questions = [
+"Are you the prettiest girl in the world? 😍",
+"Do I make you happy every day? 💖",
+"Will you be my Valentine forever? 💍"
+];
+let i = -1;
+
+const noBtn = document.getElementById("no");
+const letter = document.getElementById("letter");
+
+// Next Question
+function next() {
+  i++;
+  if(i < questions.length){
+    document.querySelector("#screen1 h1").innerText = questions[i];
+  } else {
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
+    typeLetter();
+  }
+}
+
+// Move NO Button
+function moveNo() {
+  const x = Math.random()*200 - 100;
+  const y = Math.random()*100 - 50;
+  noBtn.style.transform = `translate(${x}px,${y}px)`;
+}
+
+// Love Letter Typing Effect
+const msg = "My dear Musu, 💕\nYou are the most beautiful girl in my life.\nI love you more than words can explain.\nWill you stay with me forever? ❤️";
+
+let index = 0;
+function typeLetter() {
+  if(index < msg.length){
+    letter.innerHTML += msg[index] === "\n" ? "<br>" : msg[index];
+    index++;
+    setTimeout(typeLetter, 50);
+  }
+}
+
+// Show Photos
+function showPhotos(){
+  document.getElementById("screen2").classList.add("hidden");
+  document.getElementById("photos").classList.remove("hidden");
+}
+
+// Falling Hearts
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.animationDuration = (Math.random()*3+2)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
