@@ -76,22 +76,41 @@ p {font-size:16px;}
 
 <body>
 
-<!-- Romantic Music -->
-<audio autoplay loop>
-  <iframe width="0" height="0" 
-    src="https://www.youtube.com/embed/GfhbqXJwNes?autoplay=1&loop=1&playlist=GfhbqXJwNes" 
-    title="Dil Ibadat Kar Raha Hai" 
-    frameborder="0" 
-    allow="autoplay; encrypted-media" 
-    allowfullscreen>
-  </iframe>
-</audio>
+  <!-- Hidden YouTube Player -->
+<div id="player" style="display:none;"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0',
+    width: '0',
+    videoId: 'GfhbqXJwNes', // Dil Ibadat Video ID
+    playerVars: {
+      autoplay: 0,
+      loop: 1,
+      playlist: 'GfhbqXJwNes'
+    }
+  });
+}
+
+// Play music when YES clicked
+function playSong() {
+  player.playVideo();
+}
+</script>
+
 
 <div id="box">
 
 <div id="screen1">
   <h1>🌹 Ready for a Sweet Valentine Game, Saman? 💕</h1>
-  <button id="yes" onclick="next()">Yes 😘</button>
+  <button onclick="playSong(); alert('I Love You  ❤️')">
+YES 💖
+  </button>
   <button id="no" onmouseover="moveNo()">No 🙄</button>
 </div>
 
